@@ -41,7 +41,7 @@ CREATE TABLE styles (
   "name" TEXT NULL DEFAULT NULL,
   sale_price VARCHAR(100) NULL DEFAULT NULL,
   original_price VARCHAR(100) NULL DEFAULT NULL,
-  default_style BOOLEAN NULL DEFAULT NULL,
+  "default?" BOOLEAN NULL DEFAULT NULL,
   PRIMARY KEY (style_id)
 );
 
@@ -52,7 +52,7 @@ product_id,
 "name",
 sale_price,
 original_price,
-default_style    )
+"default?"    )
 FROM '/Users/mirasadilov/Desktop/hackreactor/data/styles.csv'
 DELIMITER ','
 CSV HEADER;
@@ -108,8 +108,10 @@ DELIMITER ','
 CSV HEADER;
 
 -- DROP AND CREATE INDEX ON RELATED
-DROP INDEX IF EXISTS idx_related_id;
-CREATE INDEX idx_related_id ON related USING btree (product_id);
+DROP INDEX IF EXISTS idx_related_product_id;
+CREATE INDEX idx_related_product_id ON related USING btree (product_id);
+DROP INDEX IF EXISTS idx_related_related_product_id;
+CREATE INDEX idx_related_related_product_id ON related USING btree (related_product_id);
 
 -- DROP AND CREATE INDEX ON FEATURES
 DROP TABLE IF EXISTS features CASCADE;

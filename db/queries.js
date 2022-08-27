@@ -56,12 +56,22 @@ const grabData = async (productID) => {
 // APIResponseRecords
 
 const getProduct = (request, response) => {
+  let id;
+  if(request.query.productId === undefined) {
+    id = request.params.id;
+  } else {
+    id = request.query.productId;
+  }
   pool.query(`SELECT * FROM apiresponserecords
-    WHERE id = ${request.params.id}`, (error, results) => {
+    WHERE id = ${id}`, (error, results) => {
     if (error) {
       throw error
     }
-    response.status(200).json(results.rows)
+    if(results.rows.length > 1) {
+      response.status(200).json(results.rows);
+    } else {
+      response.status(200).json(results.rows[0]);
+    }
   })
 }
 
@@ -75,16 +85,28 @@ const getAllProducts = (request, response) => {
 }
 
 const getStyles = async (request, response) => {
-
-  var result = await grabData(request.params.id)
+  let id;
+  if(request.query.productId === undefined) {
+    id = request.params.id;
+  } else {
+    id = request.query.productId;
+  }
+  var result = await grabData(id);
   emptyResults = {};
-  emptyResults.product_id = request.params.id
+  emptyResults.product_id = id;
   emptyResults.results = result
   response.status(200).json(emptyResults)
+
 }
 
 const getRelated = (request, response) => {
-  pool.query(`SELECT related_product_id FROM related WHERE product_id = ${request.params.id}`, (error, results) => {
+  let id;
+  if(request.query.productId === undefined) {
+    id = request.params.id;
+  } else {
+    id = request.query.productId;
+  }
+  pool.query(`SELECT related_product_id FROM related WHERE product_id = ${id}`, (error, results) => {
     if (error) {
       console.error(error.message)
     } else {

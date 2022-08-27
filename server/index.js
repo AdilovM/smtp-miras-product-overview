@@ -4,13 +4,18 @@ const app = express()
 const db = require('../db/queries.js')
 const port = 3000
 
+const path = require('path');
+const LOADER_PATH = path.resolve(__dirname,'/loaderio-a205387990b22005671fb6b52113d6a5.txt');
 app.use(express.json())
+app.use('/loaderio-a205387990b22005671fb6b52113d6a5.txt', express.static(LOADER_PATH));
+
 app.get('/api/products', db.getAllProducts)
 app.get('/api/products/:id/related', db.getRelated)
 app.get('/api/products/:id', db.getProduct)
 //combination of features
 app.get('/api/products/:id/styles', db.getStyles)
 //combination of photos/skus
+
 
 
 app.listen(port, () => {
