@@ -5,7 +5,7 @@ const db = require('../db/queries.js')
 const port = 3000
 
 const path = require('path');
-const LOADER_PATH = path.resolve(__dirname,'/loaderio-a205387990b22005671fb6b52113d6a5.txt');
+const LOADER_PATH = path.resolve(__dirname + '/loaderio-a205387990b22005671fb6b52113d6a5.txt');
 app.use(express.json())
 app.use('/loaderio-a205387990b22005671fb6b52113d6a5.txt', express.static(LOADER_PATH));
 

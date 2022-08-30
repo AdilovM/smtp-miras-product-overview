@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  smtpmirasproductoverview:
+    image: smtpmirasproductoverview
+    build:
+      context: .
+      dockerfile: ./Dockerfile
