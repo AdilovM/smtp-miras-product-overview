@@ -4,7 +4,7 @@
 
 **Technologies Used:** NodeJS, Express, MongoDB, Mongoose, Amazon EC2, and Redis. 
 
-**Developed by:** [@seanpwelch90](https://github.com/seanpwelch90)
+**Developed by:** [@adilovm](https://github.com/adilovm)
 
 ## Docker
 
